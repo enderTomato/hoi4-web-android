@@ -1,0 +1,6 @@
+{
+  "appId": "com.hoi4web.eventeditor",
+  "appName": "HOI4 事件编辑器",
+  "webDir": "dist",
+  "server": { "androidScheme": "https" }
+}

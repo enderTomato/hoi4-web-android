@@ -1,0 +1,46 @@
+{
+  "name": "hoi4-event-editor",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "HOI4 风格可视化事件编辑器（基于 React Flow 的独立子系统）",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --host",
+    "electron": "electron .",
+    "electron:build": "vite build && electron-builder --linux"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.3",
+    "@capacitor/cli": "^6.2.3",
+    "@capacitor/core": "^6.2.3",
+    "@xyflow/react": "^12.12.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zustand": "^5.0.16"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8",
+    "vite": "^5.4.11"
+  },
+  "build": {
+    "appId": "com.hoi4web.eventeditor",
+    "productName": "HOI4 事件编辑器",
+    "files": [
+      "dist/**/*",
+      "main.js"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Development"
+    }
+  }
+}

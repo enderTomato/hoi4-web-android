@@ -1,0 +1,136 @@
+:root {
+  --bg: #15171c;
+  --bg-panel: #1d2026;
+  --bg-node: #232730;
+  --bg-node-head: #2c3140;
+  --border: #3a3f4b;
+  --brass: #c9a227;
+  --brass-dim: #8a7330;
+  --text: #d8dce4;
+  --text-dim: #8b93a3;
+  --exec: #d9b53a;
+  --number: #38bdf8;
+  --danger: #d9534f;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body {
+  font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.ee-app { display: flex; flex-direction: column; height: 100%; }
+
+/* ---------- 工具栏 ---------- */
+.ee-toolbar {
+  display: flex; align-items: center; gap: 10px;
+  height: 48px; padding: 0 14px;
+  background: linear-gradient(180deg, #20242c, #181b21);
+  border-bottom: 2px solid var(--brass-dim);
+  z-index: 20;
+}
+.ee-brand { font-weight: 700; color: var(--brass); letter-spacing: .5px; }
+.ee-toolbar-spacer { flex: 1; }
+.ee-btn {
+  background: var(--bg-node); color: var(--text);
+  border: 1px solid var(--border); border-radius: 4px;
+  padding: 6px 12px; font-size: 13px; cursor: pointer;
+  transition: background .15s, border-color .15s;
+}
+.ee-btn:hover { background: #2c313c; border-color: var(--brass-dim); }
+.ee-btn--ghost { color: var(--text-dim); }
+
+/* ---------- 主体 ---------- */
+.ee-body { flex: 1; display: flex; min-height: 0; }
+
+/* ---------- 节点面板 ---------- */
+.ee-palette {
+  width: 200px; flex-shrink: 0;
+  background: var(--bg-panel); border-right: 1px solid var(--border);
+  padding: 12px; overflow-y: auto;
+}
+.ee-palette-title { font-size: 12px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+.ee-palette-item {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg-node); border: 1px solid var(--border);
+  border-left: 3px solid var(--brass); border-radius: 4px;
+  padding: 8px 10px; margin-bottom: 8px; cursor: grab; user-select: none;
+}
+.ee-palette-item:hover { border-color: var(--brass); background: #2a2f3a; }
+.ee-palette-icon { font-size: 16px; }
+.ee-palette-name { flex: 1; font-size: 13px; }
+.ee-palette-group { font-size: 10px; color: var(--text-dim); border: 1px solid var(--border); padding: 1px 5px; border-radius: 8px; }
+.ee-palette-tip { margin-top: 14px; font-size: 11px; color: var(--text-dim); line-height: 1.6; }
+
+/* ---------- 画布 ---------- */
+.ee-canvas { flex: 1; min-width: 0; position: relative; }
+.react-flow__attribution { background: rgba(0,0,0,.4); font-size: 10px; }
+
+/* ---------- 节点 ---------- */
+.ee-node {
+  width: 220px; background: var(--bg-node);
+  border: 1px solid var(--border); border-radius: 6px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.45);
+  font-size: 12px; overflow: hidden;
+}
+.ee-node--trigger { border-left: 3px solid var(--brass); }
+.ee-node--action { border-left: 3px solid #5b8def; }
+.ee-node--variable { border-left: 3px solid var(--number); }
+.ee-node--popup { border: 1px dashed var(--brass); background: #20242c; width: 320px; }
+.ee-node--child { width: 270px; background: #262b34; }
+.ee-node-head {
+  background: var(--bg-node-head); padding: 6px 10px;
+  font-weight: 600; color: var(--text); border-bottom: 1px solid var(--border);
+}
+.ee-node-head--child { display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--text-dim); }
+.ee-del { background: transparent; border: none; color: var(--danger); cursor: pointer; font-size: 12px; }
+.ee-field { display: block; padding: 6px 10px; }
+.ee-field-label { display: block; font-size: 10px; color: var(--text-dim); margin-bottom: 3px; }
+.ee-input, .ee-select, .ee-textarea {
+  width: 100%; background: #181b21; color: var(--text);
+  border: 1px solid var(--border); border-radius: 3px; padding: 5px 7px; font-size: 12px;
+}
+.ee-textarea { resize: vertical; font-family: inherit; }
+.ee-popup-hint { padding: 8px 10px; font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+.ee-img-preview { display: block; width: calc(100% - 20px); margin: 0 10px 8px; border-radius: 3px; border: 1px solid var(--border); }
+
+/* ---------- 端口 ---------- */
+.ee-handle { width: 11px; height: 11px; border: 2px solid var(--bg); }
+.ee-handle--exec { background: var(--exec); }
+.ee-handle--number { background: var(--number); }
+
+/* ---------- 右键菜单 ---------- */
+.ee-context-menu {
+  position: fixed; z-index: 1000; min-width: 180px;
+  background: var(--bg-panel); border: 1px solid var(--brass-dim);
+  border-radius: 6px; padding: 4px; box-shadow: 0 8px 24px rgba(0,0,0,.6);
+}
+.ee-context-item {
+  display: block; width: 100%; text-align: left;
+  background: transparent; border: none; color: var(--text);
+  padding: 8px 10px; font-size: 13px; cursor: pointer; border-radius: 4px;
+}
+.ee-context-item:hover { background: #2c313c; }
+.ee-context-item--danger { color: var(--danger); }
+.ee-context-divider { height: 1px; background: var(--border); margin: 4px 0; }
+
+/* ---------- 模态 ---------- */
+.ee-modal-overlay {
+  position: fixed; inset: 0; z-index: 1100;
+  background: rgba(0,0,0,.55); display: flex; align-items: center; justify-content: center;
+}
+.ee-modal {
+  width: 420px; max-width: 92vw; background: var(--bg-panel);
+  border: 1px solid var(--brass-dim); border-radius: 8px; padding: 18px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.6);
+}
+.ee-modal-head { font-size: 16px; font-weight: 700; color: var(--brass); margin-bottom: 14px; }
+.ee-modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 14px; }
+.ee-json-preview {
+  margin-top: 12px; max-height: 200px; overflow: auto;
+  background: #11141a; border: 1px solid var(--border); border-radius: 4px;
+  padding: 8px; font-size: 11px; color: #9fe6b0; font-family: ui-monospace, monospace;
+}
