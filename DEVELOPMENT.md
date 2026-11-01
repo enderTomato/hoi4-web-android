@@ -153,3 +153,39 @@ export ANDROID_HOME=$HOME/android-sdk
 | 7 | 编写本开发文档、初始化本地 git | 进行中 |
 
 > 说明：上表为阶段级时间线；单次命令级精确时间戳未单独留存，但所有动作均发生在本会话（2026-11-01）内，按上表顺序执行。
+
+---
+
+## 八、P2 阶段进展（分支 `feature/event-editor`）
+
+按用户分阶段计划，从 **P2：核心游戏（横屏 + 真实世界地图 + 地形/建筑白模）** 起步（编辑器 Rete.js 留待 P1）。
+
+### 新增 / 修改
+- `src/data/world.json`：由 Natural Earth 110m 国界 GeoJSON 精简为仅坐标（288 多边形，154KB），作底图数据源。
+- `src/utils/worldTexture.js`：等距圆柱投影把国界画到 Canvas → `CanvasTexture`，贴地面平面，得到**真实世界地图底图**（暗橄榄绿陆地 + 国界描边）。
+- `src/components/GameScene.vue`（重写）：地面替换为世界地图纹理；新增**低多边形预制地形瓦片网格**（16×8，顶点噪声位移、`flatShading`）。
+- `src/components/SceneLogic.vue`（Tresjs 画布内子组件，逐帧）：
+  - 仅当放大比例 ≥ 80% 开启 3D 地形层；
+  - **视锥裁剪**：`THREE.Frustum` 只渲染摄像头范围内的瓦片 → 仅显示摄像头范围内；
+  - **距离 LOD**：距镜头目标 > 200 单位的瓦片隐藏，露出下方扁平世界地图（近似「远景高斯模糊 / 无需精细化渲染」）。
+- 建筑白模（24 个）保持 ≥ 80% 显示。
+- `src/components/LandscapeGuard.vue` + `App.vue`：移动端竖屏显示「请横屏」遮罩，并首次触摸尝试 `screen.orientation.lock('landscape')`。
+- `android/app/src/main/AndroidManifest.xml`：`android:screenOrientation="sensorLandscape"` 锁定横屏。
+
+### 验证 / 发布
+- `npm run build` 通过（55 模块，gzip 298KB）。
+- `assembleDebug` 通过，APK 4.2MB。
+- 推送到 `feature/event-editor`，发布预发布 **v0.2.0-map**（APK 附件）：
+  https://github.com/enderTomato/hoi4-web-android/releases/tag/v0.2.0-map
+
+### 已知简化（诚实说明）
+- 远景「高斯模糊」为**近似**：远处瓦片直接隐藏、露出扁平地图，而非真正后期模糊处理（真 3D 模糊开销大，留待后续后处理 pass）。
+- 3D 渲染仍需 iQOO Z5x 真机实测（沙箱无 GPU，未跑通 WebGL）。
+- 世界地图坐标系为等距圆柱投影，未做墨卡托/国家边界政治化处理（纯几何风格化）。
+
+## 九、剩余阶段清单
+- **P1 事件编辑器**（独立系统，Rete.js）：画布/节点面板/类型化端口/容器节点/导出导入/上下文菜单 → 独立 React 应用，桌面 + APK + 文稿。
+- **P3 装备表预制白模**：解析装备 CSV，逐项低多边形白模 + 预览。
+- **P4 游戏菜单与游戏页 UI**：标题/开始(剧本/难度/国家)/加载/设置；国家信息左抽屉（领导人/意识形态/外交/民族精神/部门）；左侧工具栏；右下视图切换。
+- **P5 图标替换**：全部图标换 iconfont（需你提供 iconfont 导出）。
+- **P6 汇总发布**：合并分支、桌面 + APK + 源码 + 文稿。
