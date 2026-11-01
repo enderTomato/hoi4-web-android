@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * HOI4 暗色指挥部主题 —— Tailwind v4 CSS-first 配置
+ * 低饱和橄榄/炭黑底 + 黄铜点缀 + 做旧描边，营造“实体感”面板
+ * ------------------------------------------------------------------ */
+@theme {
+  --color-hoi-bg: #14170f;
+  --color-hoi-bg2: #0e110a;
+  --color-hoi-panel: #20241a;
+  --color-hoi-panel2: #2a2f22;
+  --color-hoi-line: #3c4430;
+  --color-hoi-brass: #c8a96a;
+  --color-hoi-brass-d: #8a6d34;
+  --color-hoi-text: #d9d3bf;
+  --color-hoi-muted: #8c8470;
+  --color-hoi-alert: #b5453b;
+  --color-hoi-ok: #7faa5e;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #1b2014 0%, #14170f 55%, #0e110a 100%);
+  color: var(--color-hoi-text);
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui,
+    -apple-system, sans-serif;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  user-select: none;
+}
+
+/* 金属/做旧纸张质感面板：细微纹理 + 内高光 + 投影，避免纯色直角 */
+.hoi-panel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.14)),
+    repeating-linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.014) 0 2px,
+      rgba(0, 0, 0, 0.014) 2px 4px
+    ),
+    var(--color-hoi-panel);
+  border: 1px solid var(--color-hoi-line);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.2),
+    0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+/* 轻量描边（窄条/分隔线使用） */
+.hoi-edge {
+  border: 1px solid var(--color-hoi-line);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+/* 黄铜渐变分隔/标题条 */
+.hoi-brass-bar {
+  background: linear-gradient(
+    180deg,
+    rgba(200, 169, 106, 0.22),
+    rgba(138, 109, 52, 0.12)
+  );
+  border-bottom: 1px solid var(--color-hoi-brass-d);
+}
+
+.tabnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 滚动条（指挥部工具感） */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.25);
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--color-hoi-line);
+  border-radius: 4px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--color-hoi-brass-d);
+}
+
+/* 入场动画：抽屉/徽章 */
+@keyframes hoi-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.hoi-anim-down {
+  animation: hoi-slide-down 0.16s ease-out both;
+}
+
+@keyframes hoi-pop {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.hoi-anim-pop {
+  animation: hoi-pop 0.28s ease-out;
+}
+
+/* 画布容器：禁用浏览器默认手势，触控交给自定义缩放/平移 */
+.touch-none {
+  touch-action: none;
+}

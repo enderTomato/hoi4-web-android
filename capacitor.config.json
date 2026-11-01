@@ -1,0 +1,6 @@
+{
+  "appId": "com.hoi4web.prototype",
+  "appName": "HOI4 Web",
+  "webDir": "dist",
+  "server": { "androidScheme": "https" }
+}

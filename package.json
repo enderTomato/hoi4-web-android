@@ -1,0 +1,27 @@
+{
+  "name": "hoi4-web-prototype",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "钢铁雄心4 风格网页游戏原型 (Vue3 + Tresjs + Tailwind, 移动端 iQOO Z5x 优化)",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --host"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.3",
+    "@capacitor/cli": "^6.2.3",
+    "@capacitor/core": "^6.2.3",
+    "@tresjs/cientos": "^5.10.1",
+    "@tresjs/core": "^5.10.1",
+    "three": "^0.187.0",
+    "vue": "^3.5.44"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "tailwindcss": "^4.3.3",
+    "vite": "^7.3.7"
+  }
+}
