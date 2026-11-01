@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "main": "main.js",
   "description": "HOI4 风格可视化事件编辑器（基于 React Flow 的独立子系统）",
   "scripts": {
     "dev": "vite",
