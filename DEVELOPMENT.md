@@ -124,8 +124,11 @@ export ANDROID_HOME=$HOME/android-sdk
 ```
 > 真机侧载：把 `app-debug.apk` 拷到 iQOO Z5x，开启「未知来源安装」后安装。
 
-### 上传 GitHub（待认证）
-见第六节——当前沙箱 `gh` 未登录，需要用户提供 GitHub Personal Access Token 或先完成 `gh auth login`。
+### 上传 GitHub（已完成 ✅）
+- 仓库（公开）：**https://github.com/enderTomato/hoi4-web-android**
+- Release v0.1.0（含 `app-debug.apk`）：**https://github.com/enderTomato/hoi4-web-android/releases/tag/v0.1.0**
+- APK 直链：`https://github.com/enderTomato/hoi4-web-android/releases/download/v0.1.0/app-debug.apk`
+- 认证方式：用户提供 GitHub Personal Access Token（classic，`repo` 权限），经 `gh auth login --with-token` 登录后由 `gh repo create` 建仓并 `--push`，再 `gh release create` 上传 APK。
 
 ---
 
@@ -133,7 +136,7 @@ export ANDROID_HOME=$HOME/android-sdk
 
 - **WebGL 未在沙箱实测**：无头环境无 GPU，3D 渲染需 iQOO Z5x 真机验证。
 - **Mapcn / SQLite / PixiJS 未接入**：建议下一步——① Mapcn 真实中国地图底图替代 Tres 地面；② 装备表逐项预制可旋转白模；③ `sql.js` + OPFS 持久化 Action Center 待办。
-- **GitHub 上传未执行**：缺少认证（见下）。
+- **GitHub 上传已完成**：公开仓库 `enderTomato/hoi4-web-android` + Release v0.1.0（含 APK）。详见第五节。
 
 ---
 
